@@ -1,0 +1,5 @@
+allprojects {
+  repositories {
+    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+  }
+}

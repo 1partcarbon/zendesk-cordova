@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.1partcarbon.zendesk"
+        version="1.7.1.3">
+
+    <name>Zendesk</name>
+    <description>
+      Wrapper for zendesk functionality
+    </description>
+
+    <license>Apache 2.0</license>
+
+    <engines>
+        <engine name="cordova-android" version=">=3.6.0" />
+    </engines>
+
+    <js-module src="www/zendesk-native.js" name="ZendeskPlugin">
+        <clobbers target="zendeskPlugin" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ZendeskPlugin">
+                <param name="android-package" value="com.onepartcarbon.zendesk.ZendeskPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+            <preference name="android-minSdkVersion" value="15" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="application">
+        </config-file>
+
+        <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
+        <framework src="com.zendesk:sdk:1.9.1.1"/>
+
+        <!-- cordova plugin src files -->
+        <source-file src="src/android/ZendeskPlugin.java" target-dir="src/com/1partcarbon/zendesk" />
+
+    </platform>
+    <platform name="browser">
+      <js-module src="www/zendesk-browser.js" name="ZendeskPlugin">
+          <clobbers target="zendeskPlugin" />
+        </js-module>
+        <config-file target="config.xml" parent="/*">
+            <feature name="ZendeskPlugin">
+                <param name="browser-package" value="ZendeskPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+            <plugin name="ZendeskPlugin" value="ZendeskPlugin"/>
+        </config-file>
+    </platform>
+</plugin>
